@@ -19,7 +19,6 @@ services:
     image: vasiltapkin/vasilhub:latest
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "jupyterhub_data:/data"
     networks:
       - jupyterhub-net
     ports:
