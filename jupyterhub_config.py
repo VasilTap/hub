@@ -157,7 +157,7 @@ service_environment = {
     utils.ENV_NAME_EXECUTION_MODE: ENV_EXECUTION_MODE,
     utils.ENV_NAME_CLEANUP_INTERVAL_SECONDS: os.getenv(utils.ENV_NAME_CLEANUP_INTERVAL_SECONDS),
 }
-
+ENV_EXECUTION_MODE = 'swarm'
 # In Kubernetes mode, load the Kubernetes Jupyterhub config that can be configured via a config.yaml.
 # Those values will override the values set above, as it is loaded afterwards.
 if ENV_EXECUTION_MODE == utils.EXECUTION_MODE_KUBERNETES:
@@ -181,7 +181,6 @@ if ENV_EXECUTION_MODE == utils.EXECUTION_MODE_KUBERNETES:
     })
     service_host = "127.0.0.1" #"hub"
     
-ENV_EXECUTION_MODE = 'swarm'
 elif ENV_EXECUTION_MODE == utils.EXECUTION_MODE_LOCAL:
     # shm_size can only be set for Docker, not Kubernetes (see https://stackoverflow.com/questions/43373463/how-to-increase-shm-size-of-a-kubernetes-container-shm-size-equivalent-of-doc)
     #Remove for swarm
@@ -207,7 +206,7 @@ elif ENV_EXECUTION_MODE == utils.EXECUTION_MODE_LOCAL:
     # c.DockerSpawner.environment = get_or_init(c.DockerSpawner.environment, dict)
     # c.Spawner.environment.update(c.DockerSpawner.environment)
     #c.MLHubDockerSpawner.hub_name = ENV_HUB_NAME
-elif ENV_EXECUTION_MODE == EXECUTION_MODE_SWARM:
+elif ENV_EXECUTION_MODE == 'swarm':
     #SWARM PART
     c.ConfigurableHTTPProxy.should_start = False
     c.ConfigurableHTTPProxy.api_url = 'http://proxy:8001'

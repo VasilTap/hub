@@ -1,14 +1,26 @@
 version: "3"
 services:
+  proxy:
+    env_file: .env
+    image: jupyterhub/configurable-http-proxy:3.1.1
+    networks:
+      - mlhub-admin
+    # expose the proxy to the world
+    ports:
+      - "80:8000"
+    command:
+      - configurable-http-proxy
+      - "--error-target"
+      - "http://hub/hub/error"
   hub:
     env_file: .env
     image: vasiltapkin/vasilhub:latest
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      - jupyterhub-net
+      - mlhub-admin
     ports:
       - "8080:8080"
 networks:
-  jupyterhub-net:
+  mlhub-admin:
     driver: overlay
