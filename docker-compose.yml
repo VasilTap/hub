@@ -25,7 +25,7 @@ services:
     ports:
         - '2049:2049'
     volumes:
-        - "jupyterhub-nfs:/exports"
+        - "./jupyterhub-nfs:/exports"
     container_name: jupyterhub_nfs
     image: walki12/nfs-server:latest
 networks:
