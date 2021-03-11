@@ -1,0 +1,1 @@
+NFS_CONFIG_TEMPLATE=(rw,async,no_subtree_check)
