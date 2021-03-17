@@ -24,6 +24,11 @@ services:
         target: /data
         volume:
           nocopy: true
+      - type: volume
+        source: jupyteruser
+        target: /jupyterUsers
+        volume:
+          nocopy: true
     networks:
       - mlhub-admin
     ports:
@@ -33,7 +38,10 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "addr=192.168.99.1,nolock,soft,rw"
-      device: ":/Users/vasiltapkin/Virtualbox/Volumes"
+      device: ":/Users/vasiltapkin/Virtualbox/Volumes/data"
+  jupyteruser:
+    external:
+      name: jupyterhub-userdata
 networks:
   mlhub-admin:
     driver: overlay
