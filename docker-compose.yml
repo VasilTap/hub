@@ -20,8 +20,8 @@ services:
         source: /var/run/docker.sock
         target: /var/run/docker.sock
       - type: volume
-        source: jupyteruser
-        target: /jupyterUsers
+        source: mynfs
+        target: /nfs
         volume:
           nocopy: true
     networks:
@@ -29,11 +29,11 @@ services:
     ports:
       - "8080:8080"
 volumes:
-  jupyteruser:
-    external:
-      name: jupyterhub-userdata
+  mynfs:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.99.1,nolock,soft,rw"
+      device: ":/Users/vasiltapkin/Virtualbox/sharedvb"
 networks:
   mlhub-admin:
     driver: overlay
-
-
