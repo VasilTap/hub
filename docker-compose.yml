@@ -24,6 +24,11 @@ services:
         target: /nfs
         volume:
           nocopy: true
+      - type: volume
+        source: jupyterhub_data
+        target: /data
+        volume:
+          nocopy: true
     networks:
       - mlhub-admin
     ports:
@@ -34,6 +39,11 @@ volumes:
       type: "nfs"
       o: "addr=192.168.99.1,nolock,soft,rw"
       device: ":/Users/vasiltapkin/Virtualbox/sharedvb"
+  jupyterhub_data:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.99.1,nolock,soft,rw"
+      device: ":/Users/vasiltapkin/Virtualbox/data"
 networks:
   mlhub-admin:
     driver: overlay
